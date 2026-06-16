@@ -26,7 +26,6 @@
       <a href="index.html" data-nav="home">Home</a>
       <a href="services.html" data-nav="services">What We Plan</a>
       <a href="about.html" data-nav="about">About</a>
-      <a href="index.html#gallery">Gallery</a>
       <a href="book.html" class="btn btn-gold nav-cta">Start Planning</a>
     </div>
     <button class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -37,7 +36,6 @@
   <a href="index.html">Home</a>
   <a href="services.html">What We Plan</a>
   <a href="about.html">About</a>
-  <a href="index.html#gallery">Gallery</a>
   <a href="book.html" class="btn btn-gold">Start Planning</a>
 </aside>
 
@@ -101,31 +99,28 @@
     <div class="frame">
       <div class="section-head">
         <span class="eyebrow center">What We Plan</span>
-        <h2>One advisor. A whole world of trips.</h2>
-        <p>Whether you want sand between your toes or a once-in-a-lifetime celebration, every trip is planned around you.</p>
+        <h2>From beach escapes to big celebrations</h2>
+        <p>Two of the trips travelers ask for most. There is a whole world more where these came from.</p>
       </div>
-      <div class="card-grid">
-        <div class="icard">
-          <div class="icn"><svg viewBox="0 0 48 48"><circle cx="24" cy="17" r="7"/><path d="M24 2v4M24 28v4M9 17h4M35 17h4M13 6l3 3M35 6l-3 3M2 40c4-4 8-4 12 0s8 4 12 0 8-4 12 0 8 4 12 0M2 46c4-4 8-4 12 0s8 4 12 0 8-4 12 0 8 4 12 0"/></svg></div>
-          <h3>Beach &amp; All-Inclusive</h3>
-          <p>Caribbean and Mexico escapes at handpicked resorts. Pristine beaches, warm hospitality, and unforgettable sunsets.</p>
-        </div>
-        <div class="icard">
-          <div class="icn"><svg viewBox="0 0 48 48"><circle cx="17" cy="28" r="10"/><circle cx="31" cy="28" r="10"/><path d="M13 14l4 5 4-5M27 14l4 5 4-5M13 14h8M27 14h8"/></svg></div>
-          <h3>Weddings &amp; Groups</h3>
-          <p>Destination weddings and large group trips coordinated start to finish, so the whole party arrives stress-free.</p>
-        </div>
-        <div class="icard">
-          <div class="icn"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20"/><path d="M31 17l-4 12-12 4 4-12z"/><circle cx="24" cy="24" r="2"/></svg></div>
-          <h3>Tours &amp; Cultural Trips</h3>
-          <p>Guided getaways and cultural journeys, from European cities to small-town day trips with a story behind every stop.</p>
-        </div>
-        <div class="icard">
-          <div class="icn"><svg viewBox="0 0 48 48"><path d="M6 30l4 10h28l4-10zM24 6v24M24 6l10 4-10 4M10 30V20l14-6 14 6v10"/></svg></div>
-          <h3>Cruises</h3>
-          <p>Ocean and river cruises matched to your pace and budget, with the cabins, excursions, and timing handled for you.</p>
-        </div>
+      <div class="plan-two">
+        <a href="services.html" class="plancard">
+          <div class="pc-img"><img src="assets/beach-main.jpg" alt="Beach and all-inclusive resort"></div>
+          <div class="pc-body">
+            <h3>Beach &amp; All-Inclusive</h3>
+            <p>Caribbean and Mexico escapes at handpicked resorts, with flights, transfers, and every detail handled for you.</p>
+            <span class="pc-link">Explore beach trips &#8594;</span>
+          </div>
+        </a>
+        <a href="services.html" class="plancard">
+          <div class="pc-img"><img src="assets/weddings-main.jpg" alt="Destination wedding on the beach"></div>
+          <div class="pc-body">
+            <h3>Weddings &amp; Groups</h3>
+            <p>Destination weddings and group getaways coordinated start to finish, so everyone arrives together and stress-free.</p>
+            <span class="pc-link">Explore group travel &#8594;</span>
+          </div>
+        </a>
       </div>
+      <div class="plan-all"><a href="services.html" class="btn btn-ghost-gold">View all plan types</a></div>
     </div>
   </div>
 </section>
@@ -153,12 +148,12 @@
       </div>
       <div class="car-viewport">
         <div class="car-track" id="carTrack">
-          <div class="car-slide" style="background-image:url('assets/gallery-1.jpg');" role="img" aria-label="Turks and Caicos shoreline"><span class="car-cap">Turks &amp; Caicos shoreline</span></div>
-          <div class="car-slide" style="background-image:url('assets/gallery-2.jpg');" role="img" aria-label="Sunset over the water"><span class="car-cap">Sunset over the water</span></div>
-          <div class="car-slide" style="background-image:url('assets/gallery-3.jpg');" role="img" aria-label="Resort pool in Punta Cana"><span class="car-cap">Resort pool, Punta Cana</span></div>
-          <div class="car-slide" style="background-image:url('assets/gallery-4.jpg');" role="img" aria-label="Beach hammock afternoon"><span class="car-cap">Beach hammock afternoon</span></div>
-          <div class="car-slide" style="background-image:url('assets/gallery-5.jpg');" role="img" aria-label="Resort at dusk"><span class="car-cap">Resort lit up at dusk</span></div>
-          <div class="car-slide" style="background-image:url('assets/gallery-6.jpg');" role="img" aria-label="Aruba coastline"><span class="car-cap">Aruba coastline</span></div>
+          <div class="car-slide is-active" style="background-image:url('assets/gallery-1.jpg');" role="img" aria-label="Vacation photo"></div>
+          <div class="car-slide is-next" style="background-image:url('assets/gallery-2.jpg');" role="img" aria-label="Vacation photo"></div>
+          <div class="car-slide" style="background-image:url('assets/gallery-3.jpg');" role="img" aria-label="Vacation photo"></div>
+          <div class="car-slide" style="background-image:url('assets/gallery-4.jpg');" role="img" aria-label="Vacation photo"></div>
+          <div class="car-slide" style="background-image:url('assets/gallery-5.jpg');" role="img" aria-label="Vacation photo"></div>
+          <div class="car-slide is-prev" style="background-image:url('assets/gallery-6.jpg');" role="img" aria-label="Vacation photo"></div>
         </div>
         <div class="car-controls">
           <button class="car-btn" id="carPrev" aria-label="Previous">&#8249;</button>
@@ -178,26 +173,43 @@
         <span class="eyebrow center">In Their Words</span>
         <h2>Ten years of seamless trips</h2>
       </div>
-      <div class="tcols">
-        <div class="tcard">
-          <div class="quote">&#8220;</div>
-          <p>Ten years and dozens of trips and they've all been spectacular. Sandee takes care of everything. All you have to do is show up and enjoy.</p>
-          <div class="who"><span class="av">G</span><div><b>Greg Edwards</b><span>Repeat Traveler</span></div></div>
+      <div class="tcar">
+        <div class="tcar-viewport">
+          <div class="tcar-track">
+            <div class="tcar-slide">
+              <div class="tcard">
+                <div class="quote">&#8220;</div>
+                <p>Ten years and dozens of trips and they've all been spectacular. Sandee takes care of everything. All you have to do is show up and enjoy.</p>
+                <div class="who"><span class="av">G</span><div><b>Greg Edwards</b><span>Repeat Traveler</span></div></div>
+              </div>
+            </div>
+            <div class="tcar-slide">
+              <div class="tcard">
+                <div class="quote">&#8220;</div>
+                <p>She made our fifty-plus guest destination wedding seamless and as stress-free as possible. Our wedding wouldn't have been possible without her.</p>
+                <div class="who"><span class="av">D</span><div><b>David Rock</b><span>Destination Wedding</span></div></div>
+              </div>
+            </div>
+            <div class="tcar-slide">
+              <div class="tcard">
+                <div class="quote">&#8220;</div>
+                <p>Sandee booked our flights, made sure we accumulated our miles, scheduled private transfers, and reserved a special cocktail hour for our party of nine.</p>
+                <div class="who"><span class="av">S</span><div><b>Suzie Harris</b><span>Group Travel, Riviera Maya</span></div></div>
+              </div>
+            </div>
+            <div class="tcar-slide">
+              <div class="tcard">
+                <div class="quote">&#8220;</div>
+                <p>Whether you want a quick trip to Mexico or a dream vacation to Aruba, she will take care of everything. So excited for her to book our next one.</p>
+                <div class="who"><span class="av">E</span><div><b>Elizabeth LaGrone</b><span>Repeat Traveler</span></div></div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="tcard">
-          <div class="quote">&#8220;</div>
-          <p>She made our fifty-plus guest destination wedding seamless and as stress-free as possible. Our wedding wouldn't have been possible without her.</p>
-          <div class="who"><span class="av">D</span><div><b>David Rock</b><span>Destination Wedding</span></div></div>
-        </div>
-        <div class="tcard">
-          <div class="quote">&#8220;</div>
-          <p>Sandee booked our flights, made sure we accumulated our miles, scheduled private transfers, and reserved a special cocktail hour for our party of nine.</p>
-          <div class="who"><span class="av">S</span><div><b>Suzie Harris</b><span>Group Travel, Riviera Maya</span></div></div>
-        </div>
-        <div class="tcard">
-          <div class="quote">&#8220;</div>
-          <p>Whether you want a quick trip to Mexico or a dream vacation to Aruba, she will take care of everything. So excited for her to book our next one.</p>
-          <div class="who"><span class="av">E</span><div><b>Elizabeth LaGrone</b><span>Repeat Traveler</span></div></div>
+        <div class="car-controls">
+          <button class="car-btn tcar-prev" aria-label="Previous testimonial">&#8249;</button>
+          <div class="car-dots tcar-dots"></div>
+          <button class="car-btn tcar-next" aria-label="Next testimonial">&#8250;</button>
         </div>
       </div>
     </div>
@@ -229,6 +241,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="f-brand">
+        <img src="assets/logo.png" alt="Sunset Travel Vacations" class="footer-logo">
         <span class="brand-mark">Sunset Travel Vacations</span>
         <p>Personalized vacation planning by Sandee Densmore. Events happen, but memories last a lifetime. Let us plan a trip to somewhere you have never been.</p>
       </div>
@@ -254,7 +267,6 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
-          <li><a href="index.html#gallery">Gallery</a></li>
           <li><a href="book.html">Start Planning</a></li>
         </ul>
       </div>
