@@ -83,6 +83,13 @@
 (function(){
   var form=document.getElementById('planForm');
   if(!form)return;
+  /* Set the Formspree _next redirect to an absolute URL based on the
+     current origin/path, so it stays correct on any domain (github.io,
+     custom domain) with no manual edits. Formspree requires an absolute URL. */
+  var nextField=form.querySelector('input[name="_next"]');
+  if(nextField){
+    try{nextField.value=new URL('thank-you.html',window.location.href).href;}catch(e){}
+  }
   form.addEventListener('submit',function(e){
     var required=form.querySelectorAll('[required]'),ok=true;
     required.forEach(function(f){
