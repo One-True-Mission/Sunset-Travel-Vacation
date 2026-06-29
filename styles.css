@@ -1,23 +1,24 @@
 /* ============================================================
    SUNSET TRAVEL VACATIONS - OTM Web Design
    Shared stylesheet (all pages)
-   Palette: navy locked background, cream warm frames, gold trim
+   Palette: navy locked background, cream warm frames, teal-blue trim
    ============================================================ */
 
 :root{
   --navy:#16264A;
   --navy-deep:#0F1B38;
   --navy-deepest:#0A1228;
-  --gold:#C8841E;
-  --gold-light:#E2A640;
-  --gold-deep:#A66A14;
+  /* teal-blue accent ramp (preview) — variable names kept as --gold* so all rules pick it up */
+  --gold:#1592A8;
+  --gold-light:#3FC1D6;
+  --gold-deep:#0E7186;
   --cream:#F7F1E6;
   --cream-frame:rgba(247,241,230,0.95);
   --cream-deep:rgba(238,228,210,0.96);
   --ivory:#FCF9F2;
   --ink:#1B2C50;
   --body-text:#454C5C;
-  --hairline:rgba(166,106,20,0.22);
+  --hairline:rgba(14,113,134,0.22);
   --white:#FFFFFF;
   --shadow-soft:0 8px 24px rgba(10,18,40,0.18);
   --shadow-lift:0 22px 55px rgba(10,18,40,0.32);
@@ -45,7 +46,7 @@ body::before{
   z-index:-1;
   background:
     url('assets/body-bg.jpg') center/cover no-repeat,
-    radial-gradient(115% 75% at 78% 12%, rgba(226,166,64,0.18), transparent 52%),
+    radial-gradient(115% 75% at 78% 12%, rgba(63,193,214,0.18), transparent 52%),
     linear-gradient(162deg,#0A1228 0%,#14254A 44%,#1C3158 72%,#243A63 100%);
   filter:brightness(0.82);
 }
@@ -74,15 +75,15 @@ img{max-width:100%;display:block;}
   padding:15px 30px;border-radius:8px;cursor:pointer;border:2px solid transparent;
   transition:transform .25s ease,box-shadow .25s ease,background .25s ease,color .25s ease;
 }
-.btn-gold{background:var(--gold);color:var(--navy-deepest);box-shadow:0 10px 26px rgba(200,132,30,0.34);}
-.btn-gold:hover{background:var(--gold-light);transform:translateY(-3px);box-shadow:0 16px 34px rgba(200,132,30,0.42);}
+.btn-gold{background:var(--gold);color:var(--navy-deepest);box-shadow:0 10px 26px rgba(21,146,168,0.34);}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-3px);box-shadow:0 16px 34px rgba(21,146,168,0.42);}
 .btn-outline{background:transparent;color:var(--white);border-color:rgba(255,255,255,0.6);}
 .btn-outline:hover{border-color:var(--gold);color:var(--gold-light);transform:translateY(-3px);}
 .btn-ghost-gold{background:transparent;color:var(--gold-deep);border-color:var(--gold);}
 .btn-ghost-gold:hover{background:var(--gold);color:var(--navy-deepest);transform:translateY(-3px);}
 
 /* ---------- NAV ---------- */
-.nav{position:fixed;top:0;left:0;right:0;z-index:120;background:rgba(12,22,46,0.92);border-bottom:1px solid rgba(226,166,64,0.18);}
+.nav{position:fixed;top:0;left:0;right:0;z-index:120;background:rgba(12,22,46,0.92);border-bottom:1px solid rgba(63,193,214,0.18);}
 .nav-inner{max-width:var(--container);margin:0 auto;padding:0 24px;height:74px;display:flex;align-items:center;justify-content:space-between;}
 .brand{display:flex;align-items:center;gap:12px;}
 .brand-logo{height:44px;width:auto;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.35));transition:transform .25s ease;}
@@ -116,7 +117,7 @@ body.nav-open .nav-backdrop{opacity:1;pointer-events:auto;}
   display:flex;flex-direction:column;
 }
 body.nav-open .mobile-panel{transform:translateX(0);}
-.mobile-panel a{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:500;color:rgba(255,255,255,0.9);letter-spacing:0.02em;padding:18px 0;border-bottom:1px solid rgba(226,166,64,0.18);transition:color .25s ease,padding-left .25s ease;}
+.mobile-panel a{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:500;color:rgba(255,255,255,0.9);letter-spacing:0.02em;padding:18px 0;border-bottom:1px solid rgba(63,193,214,0.18);transition:color .25s ease,padding-left .25s ease;}
 .mobile-panel a:hover{color:var(--gold-light);padding-left:10px;}
 .mobile-panel .btn{margin-top:28px;width:100%;border-bottom:none;}
 
@@ -131,9 +132,9 @@ body.nav-open .mobile-panel{transform:translateX(0);}
 .hero-content{position:relative;z-index:1;max-width:660px;}
 .hero .hero-eyebrow{color:var(--gold-light);margin-bottom:18px;}
 .hero .hero-eyebrow::before{background:var(--gold-light);}
-.hero-script{font-family:'Parisienne',cursive;font-size:clamp(1.7rem,3.2vw,2.4rem);color:#FFE9C2;line-height:1;margin-bottom:6px;text-shadow:0 2px 18px rgba(0,0,0,0.4);}
+.hero-script{font-family:'Parisienne',cursive;font-size:clamp(1.7rem,3.2vw,2.4rem);color:#BFE9F2;line-height:1;margin-bottom:6px;text-shadow:0 2px 18px rgba(0,0,0,0.4);}
 .hero h1{font-size:clamp(2.9rem,6.4vw,4.7rem);color:var(--white);font-weight:600;margin-bottom:22px;text-shadow:0 4px 30px rgba(0,0,0,0.45);}
-.hero h1 em{font-style:italic;color:#FFE3AE;}
+.hero h1 em{font-style:italic;color:#6FCFE0;}
 .hero p.lede{font-size:1.18rem;color:rgba(255,255,255,0.94);max-width:540px;margin-bottom:36px;text-shadow:0 2px 14px rgba(0,0,0,0.4);}
 .hero-cta{display:flex;gap:16px;flex-wrap:wrap;}
 
@@ -164,7 +165,7 @@ body.nav-open .mobile-panel{transform:translateX(0);}
 .frame.deep{background:var(--cream-deep);}
 /* Center accent tab for first content frame on inner pages */
 .frame.has-tab{position:relative;}
-.frame.has-tab::after{content:"";position:absolute;top:-3px;left:50%;transform:translateX(-50%);width:90px;height:3px;background:var(--gold);border-radius:0 0 3px 3px;box-shadow:0 0 12px rgba(226,166,64,0.6);}
+.frame.has-tab::after{content:"";position:absolute;top:-3px;left:50%;transform:translateX(-50%);width:90px;height:3px;background:var(--gold);border-radius:0 0 3px 3px;box-shadow:0 0 12px rgba(63,193,214,0.6);}
 
 .section-head{text-align:center;max-width:700px;margin:0 auto 48px;}
 .section-head h2{font-size:clamp(2.1rem,4vw,3.1rem);margin:16px 0 14px;}
@@ -273,7 +274,7 @@ body.nav-open .mobile-panel{transform:translateX(0);}
 .field{margin-bottom:20px;}
 .field label{display:block;font-weight:700;font-size:0.88rem;color:var(--ink);margin-bottom:7px;letter-spacing:0.01em;}
 .field input,.field select,.field textarea{width:100%;font-family:'Nunito Sans',sans-serif;font-size:1rem;color:var(--ink);background:var(--white);border:1px solid var(--hairline);border-radius:8px;padding:13px 15px;transition:border-color .2s ease,box-shadow .2s ease;}
-.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(226,166,64,0.22);}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(63,193,214,0.22);}
 .field textarea{resize:vertical;min-height:120px;}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 .form-shell .btn{width:100%;margin-top:8px;}
