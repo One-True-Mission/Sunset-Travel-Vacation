@@ -64,21 +64,26 @@
         <span class="eyebrow">Your Trip</span>
         <h2 style="font-size:1.9rem;margin:14px 0 22px;">Where would you like to go?</h2>
         <form id="planForm" action="https://formspree.io/f/mdavvwow" method="POST">
-          <input type="hidden" name="_next" value="https://one-true-mission.github.io/Sunset-Travel-Vacations/thank-you.html">
           <input type="hidden" name="_subject" value="New trip inquiry from Sunset Travel Vacations">
           <div class="field-row">
             <div class="field">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" required>
+              <label for="first_name">First name</label>
+              <input type="text" id="first_name" name="first_name" autocomplete="given-name" required>
             </div>
             <div class="field">
-              <label for="phone">Phone</label>
-              <input type="tel" id="phone" name="phone" required>
+              <label for="last_name">Last name</label>
+              <input type="text" id="last_name" name="last_name" autocomplete="family-name" required>
             </div>
           </div>
-          <div class="field">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+          <div class="field-row">
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" placeholder="(817) 555-0123" autocomplete="tel" inputmode="numeric" required>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="name@example.com" autocomplete="email" required>
+            </div>
           </div>
           <div class="field-row">
             <div class="field">

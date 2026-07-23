@@ -79,26 +79,140 @@
   render();start();
 })();
 
-/* ---------- Light form validation (book page) ---------- */
+/* ============================================================
+   FORM: validation + AJAX submit + guaranteed thank-you redirect
+
+   Why AJAX: Formspree no longer honors the `_next` hidden field
+   for the post-submit redirect (it is now a dashboard setting), so
+   relying on it dumps users on Formspree's generic "Thanks!" page.
+   We submit in the background and redirect ourselves, which works
+   on any plan, any domain, with no dashboard configuration.
+   ============================================================ */
 (function(){
   var form=document.getElementById('planForm');
   if(!form)return;
-  /* Set the Formspree _next redirect to an absolute URL based on the
-     current origin/path, so it stays correct on any domain (github.io,
-     custom domain) with no manual edits. Formspree requires an absolute URL. */
-  var nextField=form.querySelector('input[name="_next"]');
-  if(nextField){
-    try{nextField.value=new URL('thank-you.html',window.location.href).href;}catch(e){}
+
+  var THANK_YOU='thank-you.html';
+  var EMAIL_RE=/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/;
+
+  function wrap(el){return el.closest('.field')||el.parentNode;}
+  function clearError(el){
+    el.classList.remove('has-error');
+    var old=wrap(el).querySelector('.field-error');
+    if(old)old.parentNode.removeChild(old);
   }
-  form.addEventListener('submit',function(e){
-    var required=form.querySelectorAll('[required]'),ok=true;
-    required.forEach(function(f){
-      if(!f.value.trim()){f.style.borderColor='#c0392b';ok=false;}
-      else{f.style.borderColor='';}
+  function setError(el,msg){
+    clearError(el);
+    el.classList.add('has-error');
+    var s=document.createElement('span');
+    s.className='field-error';
+    s.textContent=msg;
+    wrap(el).appendChild(s);
+  }
+  function clearAll(){
+    form.querySelectorAll('.field-error').forEach(function(n){n.parentNode.removeChild(n);});
+    form.querySelectorAll('.has-error').forEach(function(n){n.classList.remove('has-error');});
+  }
+  function digits(v){return (v||'').replace(/\D/g,'').slice(0,10);}
+  function formatPhone(v){
+    var d=digits(v);
+    if(d.length<4)return d;
+    if(d.length<7)return '('+d.slice(0,3)+') '+d.slice(3);
+    return '('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);
+  }
+
+  /* Phone: numeric only, auto-format, hard 10 digit cap */
+  var phone=form.querySelector('input[type="tel"]');
+  if(phone){
+    phone.setAttribute('inputmode','numeric');
+    phone.setAttribute('autocomplete','tel');
+    phone.addEventListener('input',function(){
+      var atEnd=this.selectionStart===this.value.length;
+      this.value=formatPhone(this.value);
+      if(atEnd)this.setSelectionRange(this.value.length,this.value.length);
+      clearError(this);
     });
+    phone.addEventListener('blur',function(){
+      if(this.value.length&&digits(this.value).length!==10)setError(this,'Enter a 10 digit phone number.');
+    });
+  }
+
+  /* Clear a field's error as soon as the visitor edits it */
+  form.querySelectorAll('input,select,textarea').forEach(function(f){
+    f.addEventListener('input',function(){if(this.classList.contains('has-error'))clearError(this);});
+    f.addEventListener('change',function(){if(this.classList.contains('has-error'))clearError(this);});
+  });
+
+  function validate(){
+    clearAll();
+    var ok=true,firstBad=null;
+    function fail(el,msg){setError(el,msg);ok=false;if(!firstBad)firstBad=el;}
+
+    /* Required fields must not be blank */
+    form.querySelectorAll('[required]').forEach(function(f){
+      if(!(f.value||'').trim())fail(f,'This field is required.');
+    });
+
+    /* Names need at least 2 real characters */
+    ['first_name','last_name'].forEach(function(n){
+      var f=form.querySelector('[name="'+n+'"]');
+      if(!f)return;
+      var v=(f.value||'').trim();
+      if(v&&v.length<2)fail(f,'Please enter at least 2 characters.');
+    });
+
+    /* Phone must be exactly 10 digits */
+    if(phone&&phone.value.trim()&&digits(phone.value).length!==10){
+      fail(phone,'Enter a 10 digit phone number.');
+    }
+
+    /* Email must be a full, valid address */
     var email=form.querySelector('input[type="email"]');
-    if(email&&email.value&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)){email.style.borderColor='#c0392b';ok=false;}
-    if(!ok)e.preventDefault();
+    if(email&&email.value.trim()&&!EMAIL_RE.test(email.value.trim())){
+      fail(email,'Enter a valid email address, like name@example.com.');
+    }
+
+    if(firstBad){
+      firstBad.focus();
+      firstBad.scrollIntoView({block:'center',behavior:'smooth'});
+    }
+    return ok;
+  }
+
+  function banner(msg){
+    var box=form.querySelector('.form-error-banner');
+    if(!box){
+      box=document.createElement('div');
+      box.className='form-error-banner';
+      var btn=form.querySelector('button[type="submit"]');
+      form.insertBefore(box,btn||null);
+    }
+    box.textContent=msg;
+    box.scrollIntoView({block:'center',behavior:'smooth'});
+  }
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!validate())return;
+
+    var btn=form.querySelector('button[type="submit"]'),
+        label=btn?btn.textContent:'';
+    if(btn){btn.disabled=true;btn.textContent='Sending...';}
+
+    var old=form.querySelector('.form-error-banner');
+    if(old)old.parentNode.removeChild(old);
+
+    fetch(form.action,{
+      method:'POST',
+      body:new FormData(form),
+      headers:{'Accept':'application/json'}
+    }).then(function(res){
+      if(!res.ok)throw new Error('bad-response');
+      window.location.href=new URL(THANK_YOU,window.location.href).href;
+    }).catch(function(){
+      if(btn){btn.disabled=false;btn.textContent=label;}
+      banner('Something went wrong sending your request. Please try again, or call us directly and we will take care of it.');
+    });
   });
 })();
 
