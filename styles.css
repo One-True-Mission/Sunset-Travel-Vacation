@@ -400,3 +400,19 @@ body.nav-open .mobile-panel{transform:translateX(0);}
 .footer-legal{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
 .footer-legal a:hover{color:var(--gold-light);}
 .footer-legal span{opacity:0.4;}
+/* ============================================================
+   NOTICE BOXES (form invite + fee disclosure)
+   Tint derives from var(--gold) so it follows the active accent
+   ============================================================ */
+.fee-note,.invite-note{
+  background:rgba(21,146,168,0.09);
+  background:color-mix(in srgb, var(--gold) 9%, transparent);
+  border:1px solid var(--hairline);
+  border-left:3px solid var(--gold);
+  border-radius:8px;
+  padding:16px 18px;
+  margin:4px 0 20px;
+}
+.fee-note b,.invite-note b{display:block;color:var(--ink);font-size:0.9rem;font-weight:800;margin-bottom:5px;}
+.fee-note p,.invite-note p{font-size:0.88rem;line-height:1.55;color:var(--body-text);margin:0;}
+.ty-card .fee-note{text-align:left;margin:24px 0;}
