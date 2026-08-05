@@ -3,6 +3,9 @@
    Shared script (all pages)
    ============================================================ */
 
+/* Respect the visitor's reduced-motion preference everywhere below */
+var PREFERS_REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 /* ---------- Mobile hamburger menu ---------- */
 (function(){
   var ham=document.querySelector('.hamburger');
@@ -29,7 +32,10 @@
   });
 })();
 
-/* ---------- Gallery carousel (home only) ---------- */
+/* ---------- Gallery carousel (home only) ----------
+   Pauses on hover AND on keyboard focus, and does not auto-advance
+   when the visitor prefers reduced motion. Dots are generated from
+   the real slide count so they can never fall out of sync. */
 (function(){
   var track=document.getElementById('carTrack');
   if(!track)return;
@@ -39,6 +45,7 @@
   if(!total)return;
   slides.forEach(function(_,i){
     var d=document.createElement('button');
+    d.type='button';
     d.className='car-dot';d.setAttribute('aria-label','Go to slide '+(i+1));
     d.addEventListener('click',function(){go(i);});
     dotsWrap.appendChild(d);
@@ -59,7 +66,7 @@
   function go(i){current=(i+total)%total;render();restart();}
   function next(){go(current+1);}
   function prev(){go(current-1);}
-  function start(){timer=setInterval(next,2000);}
+  function start(){if(PREFERS_REDUCED)return;stop();timer=setInterval(next,2000);}
   function stop(){clearInterval(timer);}
   function restart(){stop();start();}
   var nb=document.getElementById('carNext'),pb=document.getElementById('carPrev');
@@ -69,6 +76,8 @@
   var vp=track.parentElement;
   vp.addEventListener('mouseenter',stop);
   vp.addEventListener('mouseleave',start);
+  vp.addEventListener('focusin',stop);
+  vp.addEventListener('focusout',start);
   vp.addEventListener('touchstart',stop,{passive:true});
   vp.addEventListener('touchend',start);
   document.addEventListener('keydown',function(e){
@@ -148,12 +157,10 @@
     var ok=true,firstBad=null;
     function fail(el,msg){setError(el,msg);ok=false;if(!firstBad)firstBad=el;}
 
-    /* Required fields must not be blank */
     form.querySelectorAll('[required]').forEach(function(f){
       if(!(f.value||'').trim())fail(f,'This field is required.');
     });
 
-    /* Names need at least 2 real characters */
     ['first_name','last_name'].forEach(function(n){
       var f=form.querySelector('[name="'+n+'"]');
       if(!f)return;
@@ -161,12 +168,10 @@
       if(v&&v.length<2)fail(f,'Please enter at least 2 characters.');
     });
 
-    /* Phone must be exactly 10 digits */
     if(phone&&phone.value.trim()&&digits(phone.value).length!==10){
       fail(phone,'Enter a 10 digit phone number.');
     }
 
-    /* Email must be a full, valid address */
     var email=form.querySelector('input[type="email"]');
     if(email&&email.value.trim()&&!EMAIL_RE.test(email.value.trim())){
       fail(email,'Enter a valid email address, like name@example.com.');
@@ -174,7 +179,7 @@
 
     if(firstBad){
       firstBad.focus();
-      firstBad.scrollIntoView({block:'center',behavior:'smooth'});
+      firstBad.scrollIntoView({block:'center',behavior:PREFERS_REDUCED?'auto':'smooth'});
     }
     return ok;
   }
@@ -188,7 +193,7 @@
       form.insertBefore(box,btn||null);
     }
     box.textContent=msg;
-    box.scrollIntoView({block:'center',behavior:'smooth'});
+    box.scrollIntoView({block:'center',behavior:PREFERS_REDUCED?'auto':'smooth'});
   }
 
   form.addEventListener('submit',function(e){
@@ -216,7 +221,9 @@
   });
 })();
 
-/* ---------- Testimonial carousel (home + about) ---------- */
+/* ---------- Testimonial carousel (home + about) ----------
+   Same accessibility rules as the gallery: pause on hover and on
+   keyboard focus, no auto-advance under reduced motion. */
 (function(){
   var cars=document.querySelectorAll('.tcar');
   if(!cars.length)return;
@@ -230,6 +237,7 @@
     if(!total||!track)return;
     slides.forEach(function(_,i){
       var d=document.createElement('button');
+      d.type='button';
       d.className='car-dot';d.setAttribute('aria-label','Testimonial '+(i+1));
       d.addEventListener('click',function(){go(i);});
       dotsWrap.appendChild(d);
@@ -242,13 +250,15 @@
     function go(i){cur=(i+total)%total;render();restart();}
     function nx(){go(cur+1);}
     function pv(){go(cur-1);}
-    function start(){timer=setInterval(nx,6000);}
+    function start(){if(PREFERS_REDUCED)return;stop();timer=setInterval(nx,6000);}
     function stop(){clearInterval(timer);}
     function restart(){stop();start();}
     if(nextBtn)nextBtn.addEventListener('click',nx);
     if(prevBtn)prevBtn.addEventListener('click',pv);
     car.addEventListener('mouseenter',stop);
     car.addEventListener('mouseleave',start);
+    car.addEventListener('focusin',stop);
+    car.addEventListener('focusout',start);
     car.addEventListener('touchstart',stop,{passive:true});
     car.addEventListener('touchend',start);
     render();start();
